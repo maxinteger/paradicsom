@@ -1,0 +1,61 @@
+{
+  "name": "paradicsom",
+  "version": "1.0.0",
+  "description": "Another pomodoro clone",
+  "private": true,
+  "author": {
+    "name": "Laszlo Vadasz"
+  },
+  "main": "public/bundle.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register --recursive test",
+    "coverage": "nyc mocha --recursive test",
+    "report": "nyc report --reporter=lcov",
+    "check-coverage": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@cycle/dom": "10.0.0",
+    "@cycle/xstream-run": "3.0.0",
+    "xstream": "5.0.6",
+    "ramda": "^0.21.0"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "babel-core": "^6.7.7",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-__coverage__": "^11.0.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-es2015-native-modules": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "mocha": "^2.5.3",
+    "nyc": "^6.6.1",
+    "postcss-loader": "^0.9.1",
+    "sinon": "^1.17.4",
+    "style-loader": "^0.13.1",
+    "webpack": "2.1.0-beta.13",
+    "webpack-dev-server": "2.1.0-beta.0"
+  },
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "__coverage__"
+    ]
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  }
+}

@@ -4,11 +4,14 @@ export const formatTime = (time) => {
     //const hour = time % (60 * 60 * 1000);
     //const min = (time - hour * 60 * 60 * 1000) % (60 * 1000);
 
-    if (time === 0){
+    if (isNaN(time) || time === Infinity || time === -Infinity){
         return '00:00';
     } else {
-        const min = Math.floor(time / 60000);
-        const sec = (time - min * 60000) / 1000;
-        return `${pad2(min)}:${pad2(sec)}`
+        const sign = time < 0 ? '-' : '';
+        const absTime = Math.abs(time);
+        const min = Math.floor(absTime / 60);
+        const sec = Math.floor((absTime - min * 60));
+
+        return `${sign}${pad2(min)}:${pad2(sec)}`
     }
 };

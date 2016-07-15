@@ -5,20 +5,29 @@ const utils = require('../src/utils');
 
 describe('utils', () => {
     describe('formatTime function', () => {
-        it('should be return with "00:00" if time 0', () =>
+        it('should return with "00:00" if time 0', () =>
             assert.strictEqual(utils.formatTime(0), '00:00')
         );
 
-        it('should be return with "00:05" if time 5e3', () =>
-            assert.strictEqual(utils.formatTime(5e3), '00:05')
-        );
+        it('should return with "00:00" if time is NaN or infinite', () =>{
+            assert.strictEqual(utils.formatTime(''), '00:00');
+            assert.strictEqual(utils.formatTime(null), '00:00');
+            assert.strictEqual(utils.formatTime(void 0), '00:00');
+            assert.strictEqual(utils.formatTime(NaN), '00:00');
+            assert.strictEqual(utils.formatTime(Infinity), '00:00');
+            assert.strictEqual(utils.formatTime(-Infinity), '00:00');
+        });
 
-        it('should be return with "00:10" if time 1e4', () =>
-            assert.strictEqual(utils.formatTime(1e4), '00:10')
-        );
+        it('should render properly the positive numbers', () =>{
+            assert.strictEqual(utils.formatTime(1), '00:01');
+            assert.strictEqual(utils.formatTime(10), '00:10');
+            assert.strictEqual(utils.formatTime(65), '01:05');
+        });
 
-        it('should be return with "01:05" if time 6.5e4', () =>
-            assert.strictEqual(utils.formatTime(6.5e4), '01:05')
-        );
+        it('should render properly the negative numbers', () =>{
+            assert.strictEqual(utils.formatTime(-1), '-00:01');
+            assert.strictEqual(utils.formatTime(-10), '-00:10');
+            assert.strictEqual(utils.formatTime(-65), '-01:05');
+        });
     })
 });
